@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.uaa"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "uaa",
+    "baseName": "uaa",
+    "packageName": "com.uaa",
+    "packageFolder": "com/uaa",
+    "serverPort": "9999",
+    "authenticationType": "uaa",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MTIwYjc1MmVkNjhkYWE1MzA0OWNiMzEyZTYyMmM5MjUwMzY3YTA1N2MxYjA0NDdiM2E1ZjBjNDc1ZjQ4YzhjYmFkMTI1YjdjZmE2YzY4MmE0NTI3YWFjNDlhZjI4NTI0YjU2YWMzY2M3NjExMGNkZGJlZDk1YzMyZGU4ZGFhOWQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1584086846614,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true
+  }
+}
