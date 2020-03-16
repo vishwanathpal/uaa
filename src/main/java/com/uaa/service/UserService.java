@@ -3,7 +3,10 @@ package com.uaa.service;
 import com.uaa.config.Constants;
 import com.uaa.domain.Authority;
 import com.uaa.domain.User;
+import com.uaa.domain.UserExtra;
 import com.uaa.repository.AuthorityRepository;
+
+import com.uaa.repository.UserExtraRepository;
 import com.uaa.repository.UserRepository;
 import com.uaa.security.AuthoritiesConstants;
 import com.uaa.security.SecurityUtils;
@@ -43,11 +46,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final UserExtraRepository userExtraRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, UserExtraRepository userExtraRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userExtraRepository = userExtraRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -87,7 +93,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password, String phone) {
         userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
             boolean removed = removeNonActivatedUser(existingUser);
             if (!removed) {
@@ -122,6 +128,14 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        // Create and save the UserExtra entity
+        UserExtra newUserExtra = new UserExtra();
+        newUserExtra.setUser(newUser);
+        newUserExtra.setPhone(phone);
+        userExtraRepository.save(newUserExtra);
+        log.debug("Created Information for UserExtra: {}", newUserExtra);
+
         return newUser;
     }
 
